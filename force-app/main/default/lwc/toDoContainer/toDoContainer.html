@@ -1,0 +1,45 @@
+<template>
+    <!-- header start -->
+    <div class="slds-page-header">
+        <div class="slds-page-header__row">
+          <div class="slds-page-header__col-title">
+            <div class="slds-media" >
+                <lightning-icon icon-name="custom:custom55" alternative-text="ToDo" title="ToDo"></lightning-icon>
+              <div class="slds-media__body" style="padding-left: 5px;">
+                <div class="slds-page-header__name">
+                  <div class="slds-page-header__name-title">
+                    <h1>
+                      <span class="slds-page-header__title slds-truncate" title="To Do List">To Do List</span>
+                    </h1>
+                  </div>
+                </div>
+                <p class="slds-page-header__name-meta">Alex Abdulla • The Big Boss</p>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <!-- header end-->  
+
+    <article class="slds-card">
+        <div class="slds-card__body slds-card__body_inner">
+            <template for:each={ToDos} for:item="todo">
+                <p key={todo.Id}>
+                    <b>Name: </b> {todo.Name}
+                    <br>
+                    <b>Description: </b> {todo.Description__c}
+                    <br>
+                    <br>
+                </p>
+            </template>
+
+
+        </div>
+        <footer class="slds-card__footer">
+          <a class="slds-card__footer-action" href="javascript:void(0);">View All
+            <span class="slds-assistive-text">Accounts</span>
+          </a>
+        </footer>
+      </article>
+
+</template>
