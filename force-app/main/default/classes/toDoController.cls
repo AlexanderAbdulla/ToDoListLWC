@@ -12,4 +12,13 @@ public with sharing class toDoController {
         update td;
         return td;
     }
+
+    @AuraEnabled
+    public static ToDo__c updateToDoNameDescription(String toDoId, String name, String description){
+        ToDo__c td = [SELECT id, name, Status__c, Description__c FROM  ToDo__c WHERE id = :toDoId LIMIT 1];
+        td.Name = name;
+        td.Description__c = description;
+        update td;
+        return td;
+    }
 }
