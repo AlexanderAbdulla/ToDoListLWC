@@ -52,7 +52,23 @@
                             <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Create New ToDo</h2>
                         </header>
                         <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
-                            <p>asdsadas</p>
+                            
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label" for="text-input-id-1">
+                                  <abbr class="slds-required" title="required">* </abbr>Name:</label>
+                                <div class="slds-form-element__control">
+                                  <input type="text" data-my-id="name-input" placeholder="Name" required="" class="slds-input" />
+                                </div>
+                            </div>
+
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label" for="text-input-id-1">
+                                  <abbr class="slds-required" title="required">* </abbr>Description</label>
+                                <div class="slds-form-element__control">
+                                  <input type="text" data-my-id="description-input" placeholder="description" required="" class="slds-input" />
+                                </div>
+                            </div>
+                            
                         </div>
                         <footer class="slds-modal__footer">
                             <lightning-button label="Cancel" variant="neutral" onclick={closeCreateModal}></lightning-button>&nbsp;&nbsp;&nbsp;&nbsp;

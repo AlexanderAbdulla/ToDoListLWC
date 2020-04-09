@@ -21,4 +21,11 @@ public with sharing class toDoController {
         update td;
         return td;
     }
+
+    @AuraEnabled
+    public static ToDo__c createNewToDo(String name, String description){
+        ToDo__c td = new ToDo__c(name = name, Description__c = description, Status__c = 'Not Started');
+        insert td; 
+        return td; 
+    }
 }
