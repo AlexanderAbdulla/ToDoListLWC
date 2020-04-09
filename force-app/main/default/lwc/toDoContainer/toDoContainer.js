@@ -3,6 +3,7 @@ import getAllToDos from '@salesforce/apex/toDoController.getAllToDos';
 
 export default class ToDoContainer extends LightningElement {
     @track ToDos;
+    @track showCreateModal = false;
 
     @wire(getAllToDos)
     toDos({error, data}) {
@@ -16,4 +17,17 @@ export default class ToDoContainer extends LightningElement {
             console.log(error);
         }
      }
+
+    closeCreateModal() {
+        this.showCreateModal = false
+    }
+
+    addNewToDoModal() {
+        console.log('hey hey hey');
+        this.showCreateModal = true;
+    }
+
+    saveCreateModal() {
+        this.showCreateModal = false
+    }
 }

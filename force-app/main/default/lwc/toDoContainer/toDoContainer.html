@@ -32,10 +32,37 @@
 
         </div>
         <footer class="slds-card__footer">
-          <a class="slds-card__footer-action" href="javascript:void(0);">View All
+          <a class="slds-card__footer-action" onclick={addNewToDoModal}>Add New
             <span class="slds-assistive-text">Accounts</span>
           </a>
         </footer>
       </article>
+
+        <!-- edit todo create modal -->
+        <template if:true={showCreateModal}>
+            <div class="demo-only" style="height: 640px;">
+                <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                        <header class="slds-modal__header">
+                            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                                <lightning-icon icon-name="utility:close" size="medium">
+                                </lightning-icon>
+                                <span class="slds-assistive-text">Close</span>
+                            </button>
+                            <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Create New ToDo</h2>
+                        </header>
+                        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                            <p>asdsadas</p>
+                        </div>
+                        <footer class="slds-modal__footer">
+                            <lightning-button label="Cancel" variant="neutral" onclick={closeCreateModal}></lightning-button>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <lightning-button label="Save" variant="brand" onclick={saveCreateModal}></lightning-button>
+                        </footer>
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+                </div>
+        </template>
+        <!-- edit-to-do end-->
 
 </template>
