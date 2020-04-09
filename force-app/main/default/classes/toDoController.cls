@@ -6,10 +6,10 @@ public with sharing class toDoController {
     }
 
     @AuraEnabled
-    public static void updateToDoStatus(String toDoId) {
+    public static void updateToDoStatus(String toDoId, String toDoValue) {
         //a0E6g00000222hxEAA
         ToDo__c td = [SELECT id, name, Status__c, Description__c FROM  ToDo__c WHERE id = :toDoId LIMIT 1];
-        td.Status__c = 'Completed';
+        td.Status__c = toDoValue;
         update td;
     }
 

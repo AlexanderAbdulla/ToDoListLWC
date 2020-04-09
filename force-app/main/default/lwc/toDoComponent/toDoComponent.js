@@ -19,7 +19,8 @@ export default class ToDoComponent extends LightningElement {
         //update this todo's Status__c 
         console.log('handlinbg the status update');
         console.log('the todo we will update has an id of: ' + this.todo.Id);
-        updateToDoStatus({toDoId : this.todo.Id})
+     
+        updateToDoStatus({toDoId : this.todo.Id, toDoValue : this.value})
             .then(result => {
                 console.log("success!!");
                 console.log(result);
