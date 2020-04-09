@@ -1,0 +1,20 @@
+<template>
+    <div>
+        <b>Name: </b> {todo.Name}
+        <br>
+        <b>Description: </b> {todo.Description__c}
+        
+        <!-- Status Picklist -->
+        <lightning-combobox
+        name="progress"
+        label="Status"
+        value={value}
+        placeholder="Select Progress"
+        options={options}
+        onchange={handleChange} ></lightning-combobox>
+        <!-- Picklist end -->
+
+        <br>
+        <br>
+    </div>
+</template>

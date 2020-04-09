@@ -24,13 +24,9 @@
     <article class="slds-card">
         <div class="slds-card__body slds-card__body_inner">
             <template for:each={ToDos} for:item="todo">
-                <p key={todo.Id}>
-                    <b>Name: </b> {todo.Name}
-                    <br>
-                    <b>Description: </b> {todo.Description__c}
-                    <br>
-                    <br>
-                </p>
+                <div key={todo.Id}>
+                    <c-to-do-component todo={todo}></c-to-do-component>
+                </div>
             </template>
 
 
