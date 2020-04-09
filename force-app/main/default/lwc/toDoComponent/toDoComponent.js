@@ -1,19 +1,33 @@
 import { LightningElement, api, track } from 'lwc';
+import updateToDoStatus from '@salesforce/apex/toDoController.updateToDoStatus';
 
 export default class ToDoComponent extends LightningElement {
     @api todo;
-    @track value = 'inProgress';
+    @track todo;
+    @track value = '';
 
     get options() {
         return [
-            { label: 'New', value: 'new' },
-            { label: 'In Progress', value: 'inProgress' },
-            { label: 'Finished', value: 'finished' },
+            { label: 'Not Started', value: 'Not Started' },
+            { label: 'In Progress', value: 'In Progress' },
+            { label: 'Completed', value: 'Completed' },
         ];
     }
 
     handleChange(event) {
         this.value = event.detail.value;
+        //update this todo's Status__c 
+        console.log('handlinbg the status update');
+        console.log('the todo we will update has an id of: ' + this.todo.Id);
+        updateToDoStatus({toDoId : this.todo.Id})
+            .then(result => {
+                console.log("success!!");
+                console.log(result);
+            })
+            .catch(error => {
+                console.log("failure!!!");
+                console.log(error);
+        });
     }
 
 }
