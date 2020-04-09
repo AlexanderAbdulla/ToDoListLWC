@@ -6,26 +6,10 @@ public with sharing class toDoController {
     }
 
     @AuraEnabled
-    public static void updateToDoStatus(String toDoId, String toDoValue) {
-        //a0E6g00000222hxEAA
+    public static ToDo__c updateToDoStatus(String toDoId, String toDoValue) {
         ToDo__c td = [SELECT id, name, Status__c, Description__c FROM  ToDo__c WHERE id = :toDoId LIMIT 1];
         td.Status__c = toDoValue;
         update td;
+        return td;
     }
-
-    /*
-    Account a = new Account(Name='Acme2');
-insert(a);
-
-Account myAcct = [SELECT Id, Name, BillingCity FROM Account WHERE Id = :a.Id];
-myAcct.BillingCity = 'San Francisco'; 
-
-try {
-    update myAcct;
-} catch (DmlException e) {
-    // Process exception here
-}
-    */
-
-
 }

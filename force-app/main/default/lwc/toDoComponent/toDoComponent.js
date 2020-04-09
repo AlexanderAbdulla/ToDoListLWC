@@ -24,6 +24,7 @@ export default class ToDoComponent extends LightningElement {
             .then(result => {
                 console.log("success!!");
                 console.log(result);
+                this.todo = result;
             })
             .catch(error => {
                 console.log("failure!!!");
