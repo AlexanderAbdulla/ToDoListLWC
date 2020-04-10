@@ -51,7 +51,26 @@ export default class ToDoContainer extends LightningElement {
 
     handleDeleteToDo(event) {
         console.log('in parent handling event');
-        console.log(event.detail);
         console.log(event.detail.toDoId);
+
+        deleteToDo({toDoId : event.detail.toDoId})
+        .then(result => {
+            console.log('success');
+            
+            getAllToDos()
+            .then(result => {
+                console.log('successfully repopulated');
+                this.ToDos = result;
+            })
+            .catch(error => {
+                console.log(error);
+            })
+
+
+        })
+        .catch(error => {
+            console.log('failure');
+            console.log(error);
+        });
     }
 }
