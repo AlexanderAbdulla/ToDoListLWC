@@ -33,20 +33,28 @@ export default class ToDoContainer extends LightningElement {
         .then(result => {
             console.log("success!!");
             console.log(result);
+            this.ToDos = result;
+            //refreshApex(this.ToDos);
+            //this.toDos.push(result);
             // this.todo = result;
-            getAllToDos()
+            /*getAllToDos()
             .then(result => {
-                console.log('successfully repopulated');
+                console.log('successfully repopulated container');
                 this.ToDos = result;
             })
             .catch(error => {
+
                 console.log(error);
-            })
+            })*/
+            //this.showCreateModal = false;
         })
         .catch(error => {
             console.log(error);
+            //this.showCreateModal = false;
         });
-        this.showCreateModal = false
+        console.log('closing');
+        this.showCreateModal = false;
+
     }
 
     handleDeleteToDo(event) {
@@ -55,8 +63,11 @@ export default class ToDoContainer extends LightningElement {
 
         deleteToDo({toDoId : event.detail.toDoId})
         .then(result => {
-            console.log('success');
-            
+            console.log('success??');
+            this.ToDos = result;
+            console.log(result);
+            console.log('no success?!');
+            /*
             getAllToDos()
             .then(result => {
                 console.log('successfully repopulated');
@@ -64,7 +75,7 @@ export default class ToDoContainer extends LightningElement {
             })
             .catch(error => {
                 console.log(error);
-            })
+            })*/
 
 
         })
