@@ -23,15 +23,17 @@ public with sharing class toDoController {
     }
 
     @AuraEnabled
-    public static ToDo__c createNewToDo(String name, String description){
+    public static List<ToDo__c> createNewToDo(String name, String description){
         ToDo__c td = new ToDo__c(name = name, Description__c = description, Status__c = 'Not Started');
         insert td; 
-        return td; 
+        //return td; 
+        return [SELECT id, name, Status__c, Description__c FROM  ToDo__c];
     }
 
     @AuraEnabled
-    public static void  deleteToDo(String toDoId){
+    public static List<ToDo__c> deleteToDo(String toDoId){
         ToDo__c td = [SELECT id, name, Status__c, Description__c FROM  ToDo__c WHERE id = :toDoId LIMIT 1];
         delete td;
+        return [SELECT id, name, Status__c, Description__c FROM  ToDo__c];
     }
 }
