@@ -1,12 +1,13 @@
 import { LightningElement, api, track } from 'lwc';
 import updateToDoStatus from '@salesforce/apex/toDoController.updateToDoStatus';
-import updateToDoNameDescription from '@salesforce/apex/toDoController.updateToDoNameDescription'
+import updateToDoNameDescription from '@salesforce/apex/toDoController.updateToDoNameDescription';
 
 export default class ToDoComponent extends LightningElement {
     @api todo;
     @track todo;
     @track value = '';
     @track showModal = false;
+    @track showDeleteModal = false;
 
 
     get options() {
@@ -19,20 +20,54 @@ export default class ToDoComponent extends LightningElement {
 
     handleChange(event) {
         this.value = event.detail.value;
-        //update this todo's Status__c 
-        console.log('handlinbg the status update');
-        console.log('the todo we will update has an id of: ' + this.todo.Id);
      
         updateToDoStatus({toDoId : this.todo.Id, toDoValue : this.value})
             .then(result => {
-                console.log("success!!");
-                console.log(result);
                 this.todo = result;
             })
             .catch(error => {
-                console.log("failure!!!");
                 console.log(error);
         });
+    }
+
+    openDeleteModal() {
+        console.log('delete modal fx open');
+        this.showDeleteModal = true;
+    }
+
+    closeDeleteModal() {
+        console.log('close delete modal');
+        this.showDeleteModal = false;
+    }
+
+    confirmDeleteModal() {
+        console.log('confirm, delete modal child');
+        
+        // event bubble this to top
+        const deleteToDoEvent = new CustomEvent("handledeletetodo", {
+            detail : {
+                toDoId : this.todo.Id
+            }
+        });
+        this.dispatchEvent(deleteToDoEvent);
+
+        /*
+
+        deleteToDo({toDoId : this.todo.Id})
+        .then(result => {
+            console.log('success');
+            this.todo = result;
+        })
+        .catch(error => {
+            console.log('failure');
+            console.log(error);
+        });
+
+        */
+
+        // end event bubble 
+
+        this.showDeleteModal = false;
     }
 
     openmodal() {
@@ -44,36 +79,26 @@ export default class ToDoComponent extends LightningElement {
     }
 
     saveMethod() {
-        console.log('save method invoked');
-        //console.log(this.template.querySelector("input[data-my-id=name-input]").value);
-        //console.log(this.template.querySelector("input[data-my-id=name-input]").placeholder);
         var newName = this.template.querySelector("input[data-my-id=name-input]").placeholder;
         var newDescription = this.template.querySelector("input[data-my-id=description-input]").placeholder;
-
-        console.log('passed variable dec');
 
         if(this.template.querySelector("input[data-my-id=name-input]").value != "") {
             newName = this.template.querySelector("input[data-my-id=name-input]").value;
         } else {
-            console.log('in else');
             newName = this.todo.Name;
         }
 
         if(this.template.querySelector("input[data-my-id=description-input]").value != "") {
             newDescription = this.template.querySelector("input[data-my-id=description-input]").value;
         } else {
-            console.log('in else 2');
             newDescription = this.todo.Description__c;
         }
 
         updateToDoNameDescription({toDoId : this.todo.Id, name : newName, description : newDescription})
         .then(result => {
-            console.log("success!!");
-            console.log(result);
             this.todo = result;
         })
         .catch(error => {
-            console.log("failure!!!");
             console.log(error);
         });
         this.closeModal();

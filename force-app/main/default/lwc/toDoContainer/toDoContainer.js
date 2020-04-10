@@ -1,6 +1,8 @@
 import { LightningElement, wire, track } from 'lwc';
 import getAllToDos from '@salesforce/apex/toDoController.getAllToDos';
 import createNewToDo from '@salesforce/apex/toDoController.createNewToDo';
+import deleteToDo from '@salesforce/apex/toDoController.deleteToDo';
+
 
 export default class ToDoContainer extends LightningElement {
     @track ToDos;
@@ -10,12 +12,8 @@ export default class ToDoContainer extends LightningElement {
     toDos({error, data}) {
         if(data) {
             this.ToDos = data;
-            console.log("succesfully loaded data");
-            console.log(data);
         } else if (error) {
             this.ToDos = undefined;
-            console.log("there was an error");
-            console.log(error);
         }
      }
 
@@ -24,17 +22,13 @@ export default class ToDoContainer extends LightningElement {
     }
 
     addNewToDoModal() {
-        console.log('hey hey hey');
         this.showCreateModal = true;
     }
 
     saveCreateModal() {
-        console.log('save it!');
         var newName = this.template.querySelector("input[data-my-id=name-input]").value;
         var newDescription = this.template.querySelector("input[data-my-id=description-input]").value;
-        console.log(newName);
-        console.log(newDescription);
-
+   
         createNewToDo({name : newName, description : newDescription})
         .then(result => {
             console.log("success!!");
@@ -46,14 +40,18 @@ export default class ToDoContainer extends LightningElement {
                 this.ToDos = result;
             })
             .catch(error => {
-                console.log('error in repopulating todos');
-                console.log(errror);
+                console.log(error);
             })
         })
         .catch(error => {
-            console.log("failure!!!");
             console.log(error);
         });
         this.showCreateModal = false
+    }
+
+    handleDeleteToDo(event) {
+        console.log('in parent handling event');
+        console.log(event.detail);
+        console.log(event.detail.toDoId);
     }
 }

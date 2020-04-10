@@ -28,4 +28,10 @@ public with sharing class toDoController {
         insert td; 
         return td; 
     }
+
+    @AuraEnabled
+    public static void  deleteToDo(String toDoId){
+        ToDo__c td = [SELECT id, name, Status__c, Description__c FROM  ToDo__c WHERE id = :toDoId LIMIT 1];
+        delete td;
+    }
 }

@@ -25,7 +25,7 @@
         <div class="slds-card__body slds-card__body_inner">
             <template for:each={ToDos} for:item="todo">
                 <div key={todo.Id}>
-                    <c-to-do-component todo={todo}></c-to-do-component>
+                    <c-to-do-component todo={todo} onhandledeletetodo={handleDeleteToDo}></c-to-do-component>
                 </div>
             </template>
 
