@@ -7,6 +7,7 @@ import deleteToDo from '@salesforce/apex/toDoController.deleteToDo';
 export default class ToDoContainer extends LightningElement {
     @track ToDos;
     @track showCreateModal = false;
+    today = new Date();
 
     @wire(getAllToDos)
     toDos({error, data}) {
